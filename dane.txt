@@ -1,0 +1,4 @@
+Emhyr Var Emreis;Przywodca;0
+Keira Metz;DalekiZasieg;5
+Medyczka Burej Chorągwi;JednostkaObl;1
+Regis;BliskieStarcie;5
