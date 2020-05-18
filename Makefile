@@ -4,13 +4,10 @@ LDFLAGS := -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 .PHONY = all clean
 
 
-all: main.x sfml.x
+all: sfml.x 
 
 sfml.x: sfml.o reading.o cards.o
 sfml.o: sfml.cc 
-
-main.x: main.o reading.o cards.o
-main.o: main.cc
 
 reading.o: reading.cc
 

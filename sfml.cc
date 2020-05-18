@@ -2,44 +2,57 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <vector>
+#include <iterator>
 #include "functions.h"
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <sstream>
 
-int main(void){    
-    Card* geralt = new DalekiZasieg("Geralt z Rivii", 15, "geralt.jpg");
-    sf::Sprite sprite = geralt->getGraphics();
-    std::string nazwa_str;
-    std::string punkty_str;
-    std::stringstream ss, sp;
 
-    ss << "Nazwa karty: " << geralt->getName();
-    nazwa_str = ss.str();
-    
-    sp << "Liczba punktow: " << std::to_string(geralt->getPoints());
-    punkty_str = sp.str();
+int main(void){
+    std::vector <sf::Text> values;
+    std::vector <Card*> cards;
+/*
+    Card* geralt = new BliskieStarcie("Geralt z Rivii", "Wiedzmin i gbur", 15, "geralt.jpg");
+    Card* keira = new DalekiZasieg("Keira Metz", "Czarodziejka z Temerii", 5, "keiraok.jpg");
+    cards.emplace_back(new BliskieStarcie(*geralt));
+    cards.emplace_back(new DalekiZasieg(*keira));
+*/
+    cards.emplace_back(new BliskieStarcie("Geralt z Rivii", "Wiedzmin i gbur", 15, "geralt.jpg"));
+    cards.emplace_back(new DalekiZasieg("Keira Metz", "Czarodziejka z Temerii", 5, "keiraok.jpg"));
+    cards.emplace_back(new JednostkaObl("Katapulta", "Oh jak ogromna!", 8, "katapulta.jpg"));
+    cards.emplace_back(new BliskieStarcie("Komandos Niebieskich Pasow", "Chlop na schwal", 3, "komandos.jpg"));
+    for (auto& i: cards) i->showInfo();
+
+
+    int index = 1;
+
+    cards.at(index)->showInfo();
+    values = cards.at(index)->getValues();
+    sf::Sprite sprite = cards.at(index)->getGraphics();
 
     sf::Font font;
     if(!font.loadFromFile("arial.ttf")){
-        std::cout<<"font dupa";
+        std::cout<<"Error while loading font!";
         exit(EXIT_FAILURE);
     }
-
+    
     sf::Text nazwa, punkty, opis;
+    nazwa = values.at(0);
+    punkty = values.at(1);
+    opis = values.at(2);
+
     nazwa.setFont(font);
-    nazwa.setString(nazwa_str);
     nazwa.setCharacterSize(30);
     nazwa.setPosition(600.f, 150.f);
 
     punkty.setFont(font);
-    punkty.setString(punkty_str);
     punkty.setCharacterSize(30);
     punkty.setPosition(600.f, 190.f);
 
     opis.setFont(font);
-    opis.setString(L"geralt gołodupiec - wiedźmin i pijak xD");
     opis.setCharacterSize(15);
     opis.setPosition(530.f, 270.f);
 
@@ -59,14 +72,18 @@ int main(void){
 
     while(window.isOpen()){
         sf::Event event;
+        
         while(window.pollEvent(event)){
             switch(event.type){
                 case sf::Event::Closed:
+                    for (auto& i: cards) delete i;
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::Escape){
                         window.clear();
+                        for (auto& i: cards) delete i;
+                        window.close();
                         std::cout<<"Escape pressed\n";
                         exit(EXIT_SUCCESS);
                     }
@@ -76,8 +93,38 @@ int main(void){
                         sf::Rect<float> backwards = triangle_back.getGlobalBounds();
                         sf::Rect<float> forward = triangle_fwd.getGlobalBounds();
                         sf::Rect<float> menu = main_menu.getGlobalBounds();
-                        if(backwards.contains(position)) std::cout<<"Do tyłu!\n";
-                        if(forward.contains(position)) std::cout<<"Do przodu!\n";
+                        if(backwards.contains(position)){
+                            if (index == 0) continue;
+                            else {
+                                window.clear();
+                                sprite = cards.at(--index)->getGraphics();
+                                values = cards.at(index)->getValues();
+
+                                cards.at(index)->showInfo();
+                                window.clear();
+                                nazwa = values.at(0);   nazwa.setPosition(600.f, 150.f);
+                                punkty = values.at(1);  punkty.setPosition(600.f, 190.f);
+                                opis = values.at(2);    opis.setPosition(530.f, 270.f);
+                                window.draw(nazwa);
+                                window.draw(punkty);
+                                window.draw(opis);
+                            }
+                        }
+                        if(forward.contains(position)){
+                            if (index == 3) continue;
+                            else {
+                                sprite = cards.at(++index)->getGraphics();
+                                values = cards.at(index)->getValues();
+                                cards.at(index)->showInfo();
+                                window.clear();
+                                nazwa = values.at(0);   nazwa.setPosition(600.f, 150.f);
+                                punkty = values.at(1);  punkty.setPosition(600.f, 190.f);
+                                opis = values.at(2);    opis.setPosition(530.f, 270.f);
+                                window.draw(nazwa);
+                                window.draw(punkty);
+                                window.draw(opis);
+                            }
+                        }
                         if(menu.contains(position)) std::cout<<"Powrót do menu głównego!\n";
                     }
                     else if (event.mouseButton.button == sf::Mouse::Right) std::cout<<"Right clicked\n";
@@ -96,6 +143,6 @@ int main(void){
         
         window.display();
     }
-    
+
     return 0;
 }
