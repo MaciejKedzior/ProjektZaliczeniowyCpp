@@ -27,7 +27,7 @@ int main(void){
     for (auto& i: cards) i->showInfo();
 
 
-    int index = 1;
+    int index = 0;
 
     cards.at(index)->showInfo();
     values = cards.at(index)->getValues();
@@ -45,12 +45,12 @@ int main(void){
     opis = values.at(2);
 
     nazwa.setFont(font);
-    nazwa.setCharacterSize(30);
-    nazwa.setPosition(600.f, 150.f);
+    nazwa.setCharacterSize(25);
+    nazwa.setPosition(500.f, 150.f);
 
     punkty.setFont(font);
-    punkty.setCharacterSize(30);
-    punkty.setPosition(600.f, 190.f);
+    punkty.setCharacterSize(25);
+    punkty.setPosition(500.f, 190.f);
 
     opis.setFont(font);
     opis.setCharacterSize(15);
@@ -96,18 +96,13 @@ int main(void){
                         if(backwards.contains(position)){
                             if (index == 0) continue;
                             else {
-                                window.clear();
                                 sprite = cards.at(--index)->getGraphics();
                                 values = cards.at(index)->getValues();
 
                                 cards.at(index)->showInfo();
-                                window.clear();
-                                nazwa = values.at(0);   nazwa.setPosition(600.f, 150.f);
-                                punkty = values.at(1);  punkty.setPosition(600.f, 190.f);
-                                opis = values.at(2);    opis.setPosition(530.f, 270.f);
-                                window.draw(nazwa);
-                                window.draw(punkty);
-                                window.draw(opis);
+                                nazwa = values.at(0);   nazwa.setPosition(500.f, 150.f); nazwa.setFont(font);
+                                punkty = values.at(1);  punkty.setPosition(500.f, 190.f); punkty.setFont(font);
+                                opis = values.at(2);    opis.setPosition(530.f, 270.f); opis.setFont(font);
                             }
                         }
                         if(forward.contains(position)){
@@ -116,13 +111,9 @@ int main(void){
                                 sprite = cards.at(++index)->getGraphics();
                                 values = cards.at(index)->getValues();
                                 cards.at(index)->showInfo();
-                                window.clear();
-                                nazwa = values.at(0);   nazwa.setPosition(600.f, 150.f);
-                                punkty = values.at(1);  punkty.setPosition(600.f, 190.f);
-                                opis = values.at(2);    opis.setPosition(530.f, 270.f);
-                                window.draw(nazwa);
-                                window.draw(punkty);
-                                window.draw(opis);
+                                nazwa = values.at(0);   nazwa.setPosition(500.f, 150.f); nazwa.setFont(font);
+                                punkty = values.at(1);  punkty.setPosition(500.f, 190.f); punkty.setFont(font);
+                                opis = values.at(2);    opis.setPosition(530.f, 270.f); opis.setFont(font);
                             }
                         }
                         if(menu.contains(position)) std::cout<<"Powrót do menu głównego!\n";
