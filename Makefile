@@ -6,8 +6,10 @@ LDFLAGS := -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 
 all: sfml.x 
 
-sfml.x: sfml.o reading.o cards.o
+sfml.x: sfml.o game.o reading.o cards.o 
 sfml.o: sfml.cc 
+
+game.o: game.cc
 
 reading.o: reading.cc
 

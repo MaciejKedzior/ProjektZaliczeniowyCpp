@@ -17,6 +17,6 @@ WSTĘPNIE ZAPISUJĘ RZECZY, KTÓRE SĄ JUŻ POTENCJALNIE W PROJEKCIE
 3. C++
 - zakresowa pętla for                   OK
 - własny szablon klasy (lub funkcji)
-- przeciążanie operatorów               
+- przeciążanie operatorów               OK
 - wyjątki                               OK
 - plik .h z deklaracja i .cpp z definicją metod - linker OK

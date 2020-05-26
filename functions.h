@@ -10,6 +10,7 @@ class Card{
     public:
         Card (std::string _name, std::string _type, std::string _details, int _points, std::string file_name);
         Card (const Card &card);
+        Card& operator=(const Card&) {return *this;};
         virtual void showInfo()=0;
         virtual std::vector<sf::Text> getValues()=0;
         std::string getName() const;
@@ -32,6 +33,7 @@ class Przywodca:public Card{
     public:
         Przywodca (std::string _name, std::string _details, std::string file_name);
         Przywodca* clone();
+        Przywodca& operator=(const Przywodca&) {return *this;};
         Przywodca (const Card& przywodca);
         ~Przywodca () { std::cout<<"Zniszczono karte"<<std::endl; };
         void showInfo(); 
@@ -42,36 +44,30 @@ class BliskieStarcie:public Card{
     public:
         BliskieStarcie(std::string _name, std::string _details, int _points, std::string file_name);
         BliskieStarcie(const Card& bliskie);
+        BliskieStarcie& operator=(const BliskieStarcie&) {return *this;};
         ~BliskieStarcie() { std::cout<<"Zniszczono karte"<<std::endl; };;
         void showInfo();
         std::vector<sf::Text> getValues();
-        //int getPoints() const;
-    //private:
-        //int points;
 };
 
 class DalekiZasieg:public Card{
     public:
         DalekiZasieg(std::string _name, std::string _details, int _points, std::string file_name);
         DalekiZasieg(const Card& daleki);
+        DalekiZasieg& operator=(const DalekiZasieg&) {return *this;};
         ~DalekiZasieg() { std::cout<<"Zniszczono karte"<<std::endl; };;
         void showInfo();
         std::vector<sf::Text> getValues();
-        //int getPoints() const;
-    //private:
-        //int points;
 };
 
 class JednostkaObl:public Card{
     public:
         JednostkaObl(std::string _name, std::string _details, int _points, std::string file_name);
         JednostkaObl(const Card& jednostka);
+        JednostkaObl& operator=(const JednostkaObl&) {return *this;};
         ~JednostkaObl() { std::cout<<"Zniszczono karte"<<std::endl; };;
         void showInfo();
         std::vector<sf::Text> getValues();
-        //int getPoints() const; 
-    //private:
-        //int points;
 };
 
 
