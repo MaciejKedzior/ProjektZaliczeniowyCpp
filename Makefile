@@ -6,17 +6,17 @@ LDFLAGS := -lsfml-system -lsfml-graphics -lsfml-window
 
 all: sfml.x test.x
 
-test.x: test.o game.o reading.o cards.o
-test.o: test.cc
+test.x: test.o game.o card.o window.o
+test.o: test.cc 
 
-sfml.x: sfml.o game.o reading.o cards.o 
+sfml.x: sfml.o game.o card.o 
 sfml.o: sfml.cc 
+
+window.o: window.cc
 
 game.o: game.cc
 
-reading.o: reading.cc
-
-cards.o: cards.cc
+card.o: card.cc
 
 %.x: %.o
 	$(CC) $^ -o $@ $(LDFLAGS)

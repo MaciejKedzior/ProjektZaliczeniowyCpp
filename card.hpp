@@ -1,5 +1,5 @@
-#ifndef FUNCTIONS_h
-#define FUNCTIONS_H
+#ifndef CARD_h
+#define CARD_H
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -71,7 +71,7 @@ class JednostkaObl:public Card{
 };
 
 
-std::vector<std::string> splitString(std::string s, std::string delimiter);
+
 Card* createObject(std::vector <std::string> array);
 
 #endif

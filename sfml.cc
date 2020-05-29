@@ -5,8 +5,8 @@
 #include <fstream>
 #include <vector>
 #include <iterator>
-#include "functions.h"
-#include "game.h"
+#include "card.hpp"
+#include "game.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>

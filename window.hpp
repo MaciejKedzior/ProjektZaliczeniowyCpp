@@ -4,8 +4,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "game.h"
-#include "functions.h"
+#include "game.hpp"
+#include "card.hpp"
 
 
 class Window{
