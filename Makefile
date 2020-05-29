@@ -1,10 +1,13 @@
 CC := g++
 CCFLAGS := -Wall -O3 -std=c++17
-LDFLAGS := -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
+LDFLAGS := -lsfml-system -lsfml-graphics -lsfml-window
 .PHONY = all clean
 
 
-all: sfml.x 
+all: sfml.x test.x
+
+test.x: test.o game.o reading.o cards.o
+test.o: test.cc
 
 sfml.x: sfml.o game.o reading.o cards.o 
 sfml.o: sfml.cc 
