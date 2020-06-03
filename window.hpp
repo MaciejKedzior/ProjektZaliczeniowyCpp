@@ -10,10 +10,10 @@
 
 class Window{
     public:
-        Window(const std::string& _font, std::vector <Card <int>*> cards);
+        Window(const std::string& _font, Card *card);
         ~Window();
-        friend void setSprite(Window *win, Card <int>*card);
-        void run(std::vector <Card <int>*> cards);
+        friend void setSprite(Window *win, Card *card);
+        void run(Card *card);
     private:
         void initialize();
         sf::Font            font;

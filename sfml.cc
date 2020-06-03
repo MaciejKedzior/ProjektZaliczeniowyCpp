@@ -15,18 +15,18 @@
 
 int main(void){
     std::vector <sf::Text> temp_values;
-    std::vector <Card<int>*> cards;
+    std::vector <Card*> cards;
     std::array <sf::Text, 3> to_be_printed;
     sf::Font font;
     int number_of_cards;
     int index = 0;
 
     //tymczasowe inicjowanie obiektów kart na kolejnych pozycjach std::vector
-    cards.emplace_back(new BliskieStarcie<int>("Geralt z Rivii", "Wiedzmin i gbur", 15, "Karty/geralt.jpg"));
-    cards.emplace_back(new DalekiZasieg<int>("Keira Metz", "Czarodziejka z Temerii", 5, "Karty/keira.jpg"));
-    cards.emplace_back(new JednostkaObl<int>("Balista", "Oh jak ogromna!", 6, "Karty/balista.jpg"));
-    cards.emplace_back(new BliskieStarcie<int>("Komandos Niebieskich Pasow", "Chlop na schwal", 3, "Karty/komandos.jpg"));
-    cards.emplace_back(new DalekiZasieg<int>("Yennefer", "Najwieksza milosc Geralta", 7, "Karty/yennefer.jpg"));
+    cards.emplace_back(new BliskieStarcie("Geralt z Rivii", "Wiedzmin i gbur", 15, "Karty/geralt.jpg"));
+    cards.emplace_back(new DalekiZasieg("Keira Metz", "Czarodziejka z Temerii", 5, "Karty/keiraok.jpg"));
+    cards.emplace_back(new JednostkaObl("Balista", "Oh jak ogromna!", 6, "Karty/balista.jpg"));
+    cards.emplace_back(new BliskieStarcie("Komandos Niebieskich Pasow", "Chlop na schwal", 3, "Karty/komandos.jpg"));
+    cards.emplace_back(new DalekiZasieg("Yennefer", "Najwieksza milosc Geralta", 7, "Karty/yennefer.jpg"));
     number_of_cards = cards.size()-1;
 
 
@@ -71,7 +71,6 @@ int main(void){
                 case sf::Event::MouseButtonPressed:
                     if (event.mouseButton.button == sf::Mouse::Left){
                         sf::Vector2f position = sf::Vector2f(sf::Mouse::getPosition(window));
-                        //poniższe można wpakować do jakiejś struktury danych, np std::map
                         sf::Rect<float> backwards = triangle_back.getGlobalBounds();
                         sf::Rect<float> forward = triangle_fwd.getGlobalBounds();
                         sf::Rect<float> menu = main_menu.getGlobalBounds();
