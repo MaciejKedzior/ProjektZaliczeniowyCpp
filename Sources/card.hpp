@@ -4,7 +4,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-//#include "game.hpp"
+#include "game.hpp"
+
 
 class Card{     
     public:
@@ -71,8 +72,9 @@ class JednostkaObl:public Card{
 };
 
 
-
+/**Funkcja tworząca obiekt odpowiedniej klasy dziedziczącej po Card*/
 Card* createObject(std::vector <std::string> array);
 
+/**Funkcja ładująca z pliku tekstowego obiekty do std::vector*/
 std::vector <Card *> loadObjects(const std::string& file_name);
 #endif

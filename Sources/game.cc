@@ -1,4 +1,5 @@
 #include "card.hpp"
+#include <fstream>
 
 
 std::string& fix_newlines(std::string& s){

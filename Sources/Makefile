@@ -13,7 +13,7 @@ card.o: card.cc
 game.o: game.cc
 
 gwint.x: gwint.o game.o card.o window.o
-gwint.o: test.cc
+gwint.o: gwint.cc
 
 
 %.x: %.o

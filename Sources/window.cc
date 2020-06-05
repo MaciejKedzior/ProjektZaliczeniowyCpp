@@ -1,12 +1,25 @@
 #include "window.hpp"
 
 
+void Window::swapCards(std::vector <Card *> cards, const std::string& opcode){
+    if (!opcode.compare("backwards"))   --index;
+    else if (!opcode.compare("forward")) ++index;
+
+    sprite = cards.at(index)->getGraphics();
+    text_areas = cards.at(index)->getValues();
+    cards.at(index)->showInfo();                           
+    to_be_printed[0] = createTextBox(text_areas.at(0), 25, &font, sf::Vector2f(530.f, 170.f));
+    to_be_printed[1] = createTextBox(text_areas.at(1), 25, &font, sf::Vector2f(530.f, 210.f));
+    to_be_printed[2] = createTextBox(text_areas.at(2), 20, &font, sf::Vector2f(530.f, 270.f));
+}
+
+
 Window::Window(const std::string& _font, std::vector<Card *> cards):
     index (0),
     number_of_cards (cards.size()-1),
     font (loadFont(_font)),
-    legend (createTextBox("Strzalka w lewo-wstecz, strzalka w prawo-przod, prostokat-wyjdz z programu", 
-    15, &font, sf::Vector2f(500.f, 600.f))),
+    legend (createTextBox("Strzalka w lewo/Left-wstecz, strzalka w prawo/Right-przod,\nprostokat/ESC-wyjdz z programu", 
+    15, &font, sf::Vector2f(530.f, 600.f))),
     tr_back (createShape(50.f, 3, sf::Vector2f(600.f, 500.f), 270.f)),
     tr_forward (createShape(50.f, 3, sf::Vector2f(850.f, 400.f), 90.f)),
     exit_button (sf::Vector2f(250.f, 50.f)),
@@ -50,29 +63,12 @@ void Window::handleEvents(std::vector<Card *> cards){
 
                 if (event.key.code == sf::Keyboard::Left){
                     if (index == 0) continue;
-                    else{
-                        sprite = cards.at(--index)->getGraphics();
-                        text_areas = cards.at(index)->getValues();
-
-                        cards.at(index)->showInfo();
-                                
-                        to_be_printed[0] = createTextBox(text_areas.at(0), 25, &font, sf::Vector2f(530.f, 170.f));
-                        to_be_printed[1] = createTextBox(text_areas.at(1), 25, &font, sf::Vector2f(530.f, 210.f));
-                        to_be_printed[2] = createTextBox(text_areas.at(2), 20, &font, sf::Vector2f(530.f, 270.f));
-                    }
+                    else swapCards(cards, "backwards");
                 }
 
                 if (event.key.code == sf::Keyboard::Right){
                     if (index == number_of_cards) continue;
-                    else{
-                        sprite = cards.at(++index)->getGraphics();
-                        text_areas = cards.at(index)->getValues();
-                        cards.at(index)->showInfo();
-                                
-                        to_be_printed[0] = createTextBox(text_areas.at(0), 25, &font, sf::Vector2f(530.f, 170.f));
-                        to_be_printed[1] = createTextBox(text_areas.at(1), 25, &font, sf::Vector2f(530.f, 210.f));
-                        to_be_printed[2] = createTextBox(text_areas.at(2), 20, &font, sf::Vector2f(530.f, 270.f));
-                    }
+                    else swapCards(cards, "forward");
                 }
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left){
@@ -84,28 +80,11 @@ void Window::handleEvents(std::vector<Card *> cards){
 
                     if(buttons["backwards"].contains(position)){
                         if (index == 0) continue;
-                        else {
-                            sprite = cards.at(--index)->getGraphics();
-                            text_areas = cards.at(index)->getValues();
-
-                            cards.at(index)->showInfo();
-                                
-                            to_be_printed[0] = createTextBox(text_areas.at(0), 25, &font, sf::Vector2f(530.f, 170.f));
-                            to_be_printed[1] = createTextBox(text_areas.at(1), 25, &font, sf::Vector2f(530.f, 210.f));
-                            to_be_printed[2] = createTextBox(text_areas.at(2), 20, &font, sf::Vector2f(530.f, 270.f));
-                        }
+                        else swapCards(cards, "backwards");
                     }
                     if(buttons["forward"].contains(position)){
                         if (index == number_of_cards) continue;
-                        else{
-                            sprite = cards.at(++index)->getGraphics();
-                            text_areas = cards.at(index)->getValues();
-                            cards.at(index)->showInfo();
-                                
-                            to_be_printed[0] = createTextBox(text_areas.at(0), 25, &font, sf::Vector2f(530.f, 170.f));
-                            to_be_printed[1] = createTextBox(text_areas.at(1), 25, &font, sf::Vector2f(530.f, 210.f));
-                            to_be_printed[2] = createTextBox(text_areas.at(2), 20, &font, sf::Vector2f(530.f, 270.f));
-                        }
+                        else swapCards(cards, "forward");
                     }
                     if(buttons["exit_button"].contains(position)){
                         std::cout<<"Rectangle pressed\n";

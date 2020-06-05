@@ -22,9 +22,9 @@ class Window{
         void drawStuff();
         void closeWindow(std::vector<Card *> cards);
         void handleEvents(std::vector<Card *> cards);
+        void swapCards(std::vector <Card *> cards, const std::string& opcode);
     private:
-        int                     index;
-        int                     number_of_cards;
+        int                     index, number_of_cards;
         void                    initialize();
         sf::Font                font;
         sf::Text                legend;
