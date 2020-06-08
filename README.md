@@ -19,3 +19,27 @@ UWAGA: Aby program zadziałał poprawnie konieczne jest zainstalowanie na komput
     openal  
     flac  
     vorbis  
+    
+ Zagadnienia wraz z miejscem w kodzie:    
+1. Projekt obiektowy:  
+- klasy - card.hpp, window.hpp  
+- konstruktory, destruktory - card.hpp (linijki 12 i 23)    
+- konstruktor kopiujący  - card.hpp (linijka 13)  
+- deklaracja przyjaciela - window.hpp (linijka 20)  
+- dziedziczenie - card.hpp (klasa Przywodca, linijka 33)  
+- polimorfizm - card.hpp (klasa Card linijka 15, klasa Przywodca linijka 40)  
+- klasa abstrakcyjna - card.hpp (klasa Card)  
+- czysto wirtualne metody - card.hpp (klasa Card, linijki 15 i 16)     
+  
+2. STL  
+- szablony -  
+- iteratory - card.cc (linijka 189)  
+- algorytmy - card.cc (linika 190)  
+  
+3. C++  
+- zakresowa pętla for - window.cc (linijka 129)  
+- własny szablon klasy (lub funkcji)  
+- przeciążanie operatorów - card.hpp (linijka 14)  
+- wyjątki - card.cc (linijka 192)  
+- plik .h z deklaracja i .cpp z definicją metod - jest  
+- linker - jest
